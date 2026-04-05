@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    container_name: sessiz_olum_app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis_db
+    networks:
+      - internal_secure_net
+
+  redis_db:
+    image: redis:alpine
+    container_name: redis_blacklist
+    networks:
+      - internal_secure_net
+
+networks:
+  internal_secure_net:
+    driver: bridge

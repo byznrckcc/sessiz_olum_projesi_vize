@@ -1,0 +1,12 @@
+{
+  "name": "sessiz-olum-vize",
+  "version": "1.1.0",
+  "description": "JWT Token Revocation with Redis Blacklist",
+  "main": "src/app.js",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "jsonwebtoken": "^9.0.3",
+    "redis": "^4.7.1"
+  }
+}
