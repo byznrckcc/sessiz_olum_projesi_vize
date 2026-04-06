@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://www.istinye.edu.tr/sites/default/files/inline-images/isu-logo-tr.png" width="200" alt="İstinye Üniversitesi Logo">
+  <img src="https://upload.wikimedia.org/wikipedia/tr/6/60/Istinye_Universitesi_Logo.png" width="200" alt="İstinye Üniversitesi Logo">
 </p>
 
 <h1 align="center">🛡️ PROJE: SESSİZ ÖLÜM</h1>
