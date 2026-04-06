@@ -1,11 +1,28 @@
-# 🛡️ Proje: Sessiz Ölüm (JWT Token Revocation & Active IPS)
+<p align="center">
+  <img src="https://www.istinye.edu.tr/sites/default/files/inline-images/isu-logo-tr.png" width="200" alt="İstinye Üniversitesi Logo">
+</p>
+
+<h1 align="center">🛡️ PROJE: SESSİZ ÖLÜM</h1>
+<p align="center">
+  <strong>İstinye Üniversitesi - Bilgi Güvenliği Teknolojisi</strong><br>
+  <em>Siber Güvenlik Vize Projesi: JWT Token Revocation & Active IPS</em>
+</p>
+
+---
 
 | Özellik | Detay |
 | :--- | :--- |
-| **Zorluk Seviyesi** | 9/10 (Legendary) |
-| **Geliştirici** | Beyzanur Çakıcı |
+| **Zorluk Seviyesi** | 🚀 9/10 (Legendary) |
+| **Geliştirici** | **Beyzanur Çakıcı** |
 | **Rol** | Güvenlik Uzmanı / Sistem Mimarı |
 | **Teknoloji** | Node.js, Express, Redis, Docker, JWT |
+
+---
+
+## 🎬 PROJE DEMO VİDEOSU
+> **ÖNEMLİ:** Projenin IPS mekanizmasının testi ve Antigravity AI doğrulaması aşağıdaki videoda yer almaktadır.
+> 
+> **İzlemek için tıklayın:** [🎥 Project Demo Video](./demo/project-demo.webm)
 
 ---
 
@@ -33,7 +50,7 @@ Bu proje, modern web uygulamalarındaki en büyük güvenlik açıklarından bir
 ### 4️⃣ Docker Mimarisi ve Network İzolasyonu
 * **Analiz:** Redis ve Uygulama katmanı farklı konteynerlerde, izole bir **internal-network** üzerinde çalışır.
 * **Kritik Soru:** İzolasyon sağlanmazsa ne olur?
-> **Cevap:** Saldırgan Redis'un 6379 portuna sızarak kara listeyi temizleyebilir. Bu projede Redis dış dünyaya kapalıdır; sadece backend erişebilir.
+> **Cevap:** Saldırgan Redis'in 6379 portuna sızarak kara listeyi temizleyebilir. Bu projede Redis dış dünyaya kapalıdır; sadece backend erişebilir.
 
 ### 5️⃣ Tehdit Modelleme ve Akış Analizi (Fail-Safe)
 * **Analiz:** Sistemin çökme durumundaki davranışı (**Fail-Safe**) test edilmiştir.
@@ -45,9 +62,9 @@ Bu proje, modern web uygulamalarındaki en büyük güvenlik açıklarından bir
 ## 🔥 Canavar Özelliği: Aktif IPS (IP Shunning)
 Bu projeyi standart projelerden ayıran en büyük özellik **Aktif Savunma** katmanıdır:
 
-1.  Saldırgan üst üste **3 kez** yetkisiz erişim (token'sız veya iptal edilmiş token) denerse sistem alarm verir.
-2.  Redis üzerindeki sayaç (`attempts`) 3'e ulaştığında, saldırganın IP adresi **24 saat boyunca** tamamen yasaklanır (`IP_BANNED`).
-3.  Bu sayede kaba kuvvet (Brute-force) ve DoS saldırılarına karşı gerçek zamanlı koruma sağlanır.
+1. Saldırgan üst üste **3 kez** yetkisiz erişim (token'sız veya iptal edilmiş token) denerse sistem alarm verir.
+2. Redis üzerindeki sayaç (`attempts`) 3'e ulaştığında, saldırganın IP adresi **24 saat boyunca** tamamen yasaklanır (`IP_BANNED`).
+3. Bu sayede kaba kuvvet (Brute-force) ve DoS saldırılarına karşı gerçek zamanlı koruma sağlanır.
 
 ---
 
@@ -64,7 +81,7 @@ sudo service redis-server start
 node app.js
 
 # 4. Saldırı Testi (IP Ban Simülasyonu)
-for i in {1..4}; do curl http://localhost:3000/api/secure; done
+for i in {1..4}; do curl http://localhost:3000/api/secure; echo ""; done
 
 📊 Teknik Çıktılar
 
@@ -76,5 +93,4 @@ JSON
   "message": "Çok fazla şüpheli deneme! 24 saat yasaklandınız."
 }
 
-
----
+Bu proje İstinye Üniversitesi Bilgi Güvenliği Teknolojisi vize ödevi kapsamında geliştirilmiştir.
