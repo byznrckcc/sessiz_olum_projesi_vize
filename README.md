@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/tr/6/60/Istinye_Universitesi_Logo.png" width="200" alt="İstinye Üniversitesi Logo">
-</p>
+<img src="./demo/isu-logo.svg" width="200" alt="İstinye Üniversitesi Logo">
 
 <h1 align="center">🛡️ PROJE: SESSİZ ÖLÜM</h1>
 <p align="center">
