@@ -22,7 +22,7 @@
 ## 🎬 PROJE DEMO VİDEOSU
 > **ÖNEMLİ:** Projenin IPS mekanizmasının testi ve Antigravity AI doğrulaması aşağıdaki videoda yer almaktadır.
 > 
-> **İzlemek için tıklayın:** [🎥 Project Demo Video](./demo/project-demo.webm)
+> **İzlemek için tıklayın:** [🎥 Project Demo Video](./demo/project-demo.mkv)
 
 ---
 
