@@ -3,6 +3,10 @@
   "version": "1.1.0",
   "description": "JWT Token Revocation with Redis Blacklist",
   "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "node tests/security.test.js"
+  },
   "dependencies": {
     "dotenv": "^16.6.1",
     "express": "^4.22.1",
