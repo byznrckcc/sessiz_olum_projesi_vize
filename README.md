@@ -6,16 +6,18 @@
   <em>Siber Güvenlik Vize Projesi: JWT Token Revocation & Active IPS</em>
 </p>
 
----
+# 🛡️ Sessiz Ölüm (Silent Death) - Secure Web Project
+**Instructor:** Keyvan Arasteh  
+**Student:** Beyzanur Çakıcı (2420191032)
 
-| Özellik | Detay |
-| :--- | :--- |
-| **Zorluk Seviyesi** | 🚀 9/10 (Legendary) |
-| **Geliştirici** | **Beyzanur Çakıcı** |
-| **Rol** | Güvenlik Uzmanı / Sistem Mimarı |
-| **Teknoloji** | Node.js, Express, Redis, Docker, JWT |
+## 🩻 Technical Depth & Security Architecture
+This project implements a high-performance **Active IPS (Intrusion Prevention System)** using a fail-closed architecture. 
 
----
+### 🧠 Core Security Features:
+* **Active IPS Logic:** Real-time IP banning using Redis-backed rate limiting. 
+* **JWT Revocation:** State-aware token management preventing replay attacks.
+* **Pattern Evasion Defense:** Custom middleware to detect and mitigate malicious scanning attempts.
+* **Automated SecOps:** Integrated CI/CD pipeline for continuous security health audits.
 
 ## 🎬 PROJE DEMO VİDEOSU
 > **ÖNEMLİ:** Projenin IPS mekanizmasının testi ve Antigravity AI doğrulaması aşağıdaki videoda yer almaktadır.
