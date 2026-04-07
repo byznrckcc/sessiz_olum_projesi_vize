@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessiz Olum App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
+    <nav class="bg-blue-600 dark:bg-blue-800 p-4 shadow-md flex justify-between items-center text-white transition-colors duration-300">
+        <h1 class="text-xl font-bold">Sessiz Olum VIP</h1>
+        <button id="themeToggle" class="bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-200 cursor-pointer">Toggle Dark Mode</button>
+    </nav>
+
+    <div class="container mx-auto p-6 max-w-4xl" id="appContent">
+        <!-- Auth View -->
+        <div id="authView" class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg text-center mt-10 transition-colors duration-300">
+            <h2 class="text-2xl font-bold mb-4 dark:text-white">Login required</h2>
+            <p class="mb-4 text-gray-600 dark:text-gray-300">Please authenticate to continue.</p>
+            <input type="text" id="username" placeholder="Username" class="border p-2 mb-2 w-full max-w-xs rounded dark:bg-gray-700 dark:text-white dark:border-gray-600 block mx-auto">
+            <input type="password" id="password" placeholder="Password" class="border p-2 mb-4 w-full max-w-xs rounded dark:bg-gray-700 dark:text-white dark:border-gray-600 block mx-auto">
+            <button id="loginBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-semibold w-full max-w-xs">Login</button>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboardView" class="hidden">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 transition-colors duration-300">
+                <h2 class="text-2xl font-bold mb-2 dark:text-white">Welcome back!</h2>
+                <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Logout</button>
+                <button id="testApiBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded ml-2">Test Secure API</button>
+                <pre id="apiResult" class="mt-4 p-4 bg-gray-100 dark:bg-gray-900 dark:text-green-400 rounded text-sm hidden"></pre>
+            </div>
+
+            <!-- CRUD Section -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition-colors duration-300">
+                <h3 class="text-xl font-bold mb-4 dark:text-white">Entities (CRUD Demo)</h3>
+                
+                <div class="flex flex-col sm:flex-row gap-2 mb-6">
+                    <input type="text" id="itemName" placeholder="New Entity Name" class="border p-2 flex-grow rounded dark:bg-gray-700 dark:text-white dark:border-gray-600">
+                    <button id="createBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded whitespace-nowrap">Create Entity</button>
+                </div>
+
+                <ul id="itemList" class="space-y-3">
+                    <!-- Items will be injected here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        const authView = document.getElementById('authView');
+        const dashboardView = document.getElementById('dashboardView');
+        
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            authView.classList.add('hidden');
+            dashboardView.classList.remove('hidden');
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            authView.classList.remove('hidden');
+            dashboardView.classList.add('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
+
+        document.getElementById('testApiBtn').addEventListener('click', () => {
+            fetch('/api/secure', {
+                headers: { 'Authorization': 'Bearer test_token' }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const pre = document.getElementById('apiResult');
+                pre.classList.remove('hidden');
+                pre.textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(err => {
+                const pre = document.getElementById('apiResult');
+                pre.classList.remove('hidden');
+                pre.textContent = "Error fetching API (Check devtools network tab)";
+                console.error(err);
+            });
+        });
+
+        // CRUD Demo Logic
+        let items = [
+            { id: 1, name: "Alpha Entity" },
+            { id: 2, name: "Beta System" }
+        ];
+
+        function renderItems() {
+            const list = document.getElementById('itemList');
+            list.innerHTML = '';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = "flex flex-col sm:flex-row justify-between items-center bg-gray-50 dark:bg-gray-700 p-3 rounded shadow-sm border border-gray-200 dark:border-gray-600";
+                
+                const span = document.createElement('span');
+                span.className = "font-medium dark:text-white mb-2 sm:mb-0";
+                span.textContent = item.name;
+
+                const btns = document.createElement('div');
+                btns.className = "space-x-2";
+
+                const updBtn = document.createElement('button');
+                updBtn.className = "bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm";
+                updBtn.textContent = "Update";
+                updBtn.onclick = () => {
+                    const newName = prompt("Update name:", item.name);
+                    if (newName) {
+                        item.name = newName;
+                        renderItems();
+                    }
+                };
+
+                const delBtn = document.createElement('button');
+                delBtn.className = "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm";
+                delBtn.textContent = "Delete";
+                delBtn.onclick = () => {
+                    items = items.filter(i => i.id !== item.id);
+                    renderItems();
+                };
+
+                btns.appendChild(updBtn);
+                btns.appendChild(delBtn);
+                li.appendChild(span);
+                li.appendChild(btns);
+                list.appendChild(li);
+            });
+        }
+
+        document.getElementById('createBtn').addEventListener('click', () => {
+            const input = document.getElementById('itemName');
+            if (input.value.trim() !== '') {
+                items.push({ id: Date.now(), name: input.value });
+                input.value = '';
+                renderItems();
+            }
+        });
+
+        // Initial render
+        renderItems();
+    </script>
+</body>
+</html>

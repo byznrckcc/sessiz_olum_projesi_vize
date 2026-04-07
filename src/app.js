@@ -5,6 +5,7 @@ const app = express();
 
 // Middleware: Gelen JSON verilerini işlemek için standart Express parser
 app.use(express.json());
+app.use(express.static('public'));
 
 /**
  * @route   GET /api/secure
